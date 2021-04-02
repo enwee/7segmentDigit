@@ -13,13 +13,19 @@ function App() {
   
   return (
     <div style={style.container}>
-      <div style={style.top}>
-        <Digit height={280} digit={Math.floor(state/10)}/>
-        <Digit height={280} digit={state%10}/>
+      <div style={style.counter}>
+        <Digit height={280} colorOn="black" colorOff="lightgrey" digit={Math.floor(state/10)}/>
+        <Digit height={280} colorOn="silver" digit={state%10}/>
       </div>
-      <div style={style.btm}>
+      <div style={style.btn}>
         <button onClick={()=>setState(prev=>(prev+10)%100)}>+</button>
         <button onClick={()=>setState(prev=>prev<10? prev+90: prev-10)}>-</button>
+      </div>
+      <div style={style.lcd1}>
+        {Array(10).fill().map((_, index)=><Digit digit={(index+Math.floor(state/10))%10}/>)}
+      </div>
+      <div style={style.lcd2}>
+        {Array(10).fill().map((_, index)=><Digit colorOn="black" digit={(index+Math.floor(state/10))%10}/>)}
       </div>
     </div>
   );
@@ -32,16 +38,30 @@ const style = {
     display: "flex",
     flexDirection: "column",
   },
-  top : {
+  counter : {
     display: "flex",
     flexDirection: "row",
     flexWrap: "wrap",
     justifyContent: "center",
     alignItems: "center"
   },
-  btm : {
+  btn : {
     display: "flex",
     justifyContent: "center",
-
+    margin: 20
+  },
+  lcd1 : {
+    display: "flex",
+    flexWrap: "wrap",
+    justifyContent: "center",
+    backgroundColor: "black",
+    margin: 20
+  },
+  lcd2 : {
+    display: "flex",
+    flexWrap: "wrap",
+    justifyContent: "center",
+    backgroundColor: "silver",
+    margin: 20
   }
 }
