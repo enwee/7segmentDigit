@@ -13,17 +13,20 @@ function App() {
   
   return (
     <div style={style.container}>
+      <h1>Counter</h1>
       <div style={style.counter}>
-        <Digit height={280} colorOn="black" colorOff="lightgrey" digit={Math.floor(state/10)}/>
-        <Digit height={280} colorOn="silver" digit={state%10}/>
+        <Digit height={210} colorOn="black" colorOff="lightgrey" digit={Math.floor(state/10)}/>
+        <Digit height={210} colorOn="silver" digit={state%10}/>
       </div>
-      <div style={style.btn}>
-        <button onClick={()=>setState(prev=>(prev+10)%100)}>+</button>
-        <button onClick={()=>setState(prev=>prev<10? prev+90: prev-10)}>-</button>
+      <div style={style.btns}>
+        <button style={style.btn} onClick={()=>setState(prev=>(prev+10)%100)}>+</button>
+        <button style={style.btn} onClick={()=>setState(prev=>prev<10? prev+90: prev-10)}>-</button>
       </div>
+      <h1>Inverted LCD</h1>
       <div style={style.lcd1}>
         {Array(10).fill().map((_, index)=><Digit digit={(index+Math.floor(state/10))%10}/>)}
       </div>
+      <h1>LCD</h1>
       <div style={style.lcd2}>
         {Array(10).fill().map((_, index)=><Digit colorOn="black" digit={(index+Math.floor(state/10))%10}/>)}
       </div>
@@ -45,23 +48,25 @@ const style = {
     justifyContent: "center",
     alignItems: "center"
   },
-  btn : {
+  btns : {
     display: "flex",
     justifyContent: "center",
-    margin: 20
+  },
+  btn : {
+    fontSize: 30,
+    width: 50,
+    height: 50
   },
   lcd1 : {
     display: "flex",
     flexWrap: "wrap",
     justifyContent: "center",
     backgroundColor: "black",
-    margin: 20
   },
   lcd2 : {
     display: "flex",
     flexWrap: "wrap",
     justifyContent: "center",
     backgroundColor: "silver",
-    margin: 20
   }
 }
